@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسابقة مدينة التلاوة | مفاتيح الخير</title>
+
+<style>
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Cairo", Arial, sans-serif;
+  background: linear-gradient(160deg,#0f766e,#22c55e);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  color:#fff;
+}
+
+.container{
+  width:100%;
+  max-width:420px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(14px);
+  border-radius:22px;
+  padding:25px 20px;
+  box-shadow:0 20px 45px rgba(0,0,0,0.35);
+}
+
+.logo{
+  display:block;
+  margin:0 auto 12px;
+  max-width:120px;
+}
+
+.logo-small{
+  display:block;
+  margin:12px auto 5px;
+  max-width:150px;
+}
+
+h1{
+  text-align:center;
+  font-size:22px;
+  margin:8px 0 4px;
+}
+
+h2{
+  text-align:center;
+  font-size:16px;
+  color:#ffeb3b;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-top:14px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+input, select, textarea{
+  width:100%;
+  margin-top:6px;
+  padding:13px;
+  font-size:15px;
+  border-radius:12px;
+  border:none;
+  outline:none;
+}
+
+textarea{ resize:none; }
+
+/* زر واتساب أخضر */
+button{
+  margin-top:22px;
+  width:100%;
+  padding:15px;
+  font-size:17px;
+  font-weight:bold;
+  background: linear-gradient(135deg,#25D366,#1ebe5d);
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.03);
+  box-shadow:0 8px 20px rgba(0,0,0,0.35);
+}
+
+.footer{
+  text-align:center;
+  margin-top:18px;
+  font-size:13px;
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <img src="logo-charity.jpg" alt="جمعية مفاتيح الخير" class="logo">
+
+  <h1>جمعية مفاتيح الخير</h1>
+  <h2>نموذج حجز – مسابقة مدينة التلاوة</h2>
+
+  <img src="logo-contest.jpg" alt="مسابقة مدينة التلاوة" class="logo-small">
+
+  <label>الاسم الكامل</label>
+  <input type="text" id="name" placeholder="اكتب اسمك">
+
+  <label>العمر</label>
+  <input type="number" id="age" placeholder="اكتب عمرك">
+
+  <label>رقم الهاتف</label>
+  <input type="tel" id="phone" placeholder="01xxxxxxxxx">
+
+  <label>نوع الطلب</label>
+  <select id="service">
+    <option>مشاركة في المسابقة</option>
+    <option>مساعدة مالية</option>
+    <option>مساعدة غذائية</option>
+    <option>مساعدة طبية</option>
+    <option>كفالة يتيم</option>
+    <option>أخرى</option>
+  </select>
+
+  <label>ملاحظه اضافيه</label>
+  <textarea id="notes" rows="3" placeholder="اكتب أي ملاحظات"></textarea>
+
+  <button onclick="sendWhatsApp()">💬 تواصل عبر واتساب</button>
+
+  <div class="footer">
+    © مسابقة مدينة التلاوة <br>
+    بإشراف جمعية مفاتيح الخير
+  </div>
+
+</div>
+
+<script>
+function sendWhatsApp(){
+  const name = document.getElementById("name").value.trim();
+  const age = parseInt(document.getElementById("age").value.trim());
+  const phone = document.getElementById("phone").value.trim();
+  const service = document.getElementById("service").value;
+  const notes = document.getElementById("notes").value.trim();
+
+  // الحد الأدنى للعمر
+  const minAge = 5;
+
+  if(!name || !age || !phone){
+    alert("من فضلك اكتب الاسم والعمر ورقم الهاتف");
+    return;
+  }
+
+  if(age < minAge){
+    alert("عذراً، الحد الأدنى للعمر هو " + minAge + " سنوات");
+    return;
+  }
+
+  // تحية تلقائية
+  const message =
+`السلام عليكم ورحمة الله وبركاته 🌸
+أرغب في التسجيل، وهذه بياناتي:
+
+الاسم: ${name}
+العمر: ${age}
+نوع الطلب: ${service}
+الهاتف: ${phone}
+ملاحظه اضافيه: ${notes || "لا يوجد"}
+
+جزاكم الله خيراً 🤍`;
+
+  const whatsappNumber = "01116271100";
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  window.location.href = url;
+}
+</script>
+
+</body>
+</html>
