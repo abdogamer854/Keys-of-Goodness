@@ -187,7 +187,7 @@ function sendWhatsApp(){
 ملاحظه اضافيه: ${notes || "لا يوجد"}
 
 جزاكم الله خيراً 🤍`;
-
+  const whatsappNumber = "+201111317123";
   const url = `https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(message)}`;
   window.location.href = url;
 }
@@ -195,4 +195,5 @@ function sendWhatsApp(){
 
 </body>
 </html>
+
 
